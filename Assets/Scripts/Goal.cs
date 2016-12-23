@@ -1,27 +1,27 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+namespace Adaptation
+{
+	public class Goal : BaseObject
+	{
+		public Challenge challenge;
 
-public class Goal : MonoBehaviour {
+		void OnTriggerEnter(Collider col)
+		{
+			if (Utilities.BALL.Equals(col.tag))
+			{
+				int ballId = col.gameObject.GetComponent<Ball>().GetId();
+				challenge.ScoreGoal(ballId);
+			}
+		}
 
-    private const string BALL = "Ball";
-    private int score = 0;
+		public void Deploy()
+		{
 
-    void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag.Equals(BALL)) {
-            col.gameObject.GetComponent<Ball>().ToggleCollider(false);
-            score++;
-        }
-    }
+		}
 
-    // Use this for initialization
-    void Start () {
-	
+		public void Withdraw()
+		{
+
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
 }
